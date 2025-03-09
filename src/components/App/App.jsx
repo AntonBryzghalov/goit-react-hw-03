@@ -2,20 +2,18 @@ import ContactForm from "../ContactForm/ContactForm";
 import SearchBlock from "../SearchBlock/SearchBlock";
 import ContactList from "../ContactList/ContactList";
 import { useState } from "react";
+import css from "./App.module.css";
 import initialContacts from "../../contacts.json";
+import { useLocalStorageState } from "../../js/utils";
 
-//const recordsStorageKey = "records";
+const contactsStorageKey = "contacts";
 
 function App() {
-  const [contacts, setContacts] = useState(initialContacts);
+  const [contacts, setContacts] = useLocalStorageState(
+    contactsStorageKey,
+    initialContacts
+  );
   const [filter, setFilter] = useState("");
-
-  // useEffect(() => {
-  //   const storedRecords = readFromLocalStorage(recordsStorageKey);
-  //   if (storedRecords != null) {
-  //     setRecords(storedRecords);
-  //   }
-  // }, []);
 
   function AddContact(newContact) {
     setContacts((curContacts) => {
@@ -29,14 +27,14 @@ function App() {
     );
   }
 
-  console.log(contacts);
   const filteredContacts = contacts.filter(
-    (record) => record.name.includes(filter) || record.number.includes(filter)
+    (contact) =>
+      contact.name.toLowerCase().includes(filter) ||
+      contact.number.includes(filter)
   );
-  console.log(filteredContacts);
 
   return (
-    <div style={{ width: "600px", padding: "20px" }}>
+    <div className={css.phonebook}>
       <h1>Phonebook</h1>
       <ContactForm onAdd={AddContact} />
       <SearchBlock value={filter} onFilter={setFilter} />

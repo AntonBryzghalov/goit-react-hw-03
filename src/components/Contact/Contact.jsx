@@ -11,7 +11,7 @@ function Contact({ data, onDelete }) {
       <div className={css.info}>
         <FaPhone /> {data.number}
       </div>
-      <button onClick={() => onDelete(data.number)}>Delete</button>
+      <button onClick={() => onDelete(data.id)}>Delete</button>
     </div>
   );
 }
