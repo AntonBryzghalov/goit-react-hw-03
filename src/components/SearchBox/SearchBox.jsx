@@ -1,9 +1,9 @@
 import { useId } from "react";
-import css from "./SearchBlock.module.css";
+import css from "./SearchBox.module.css";
 
 const maxLength = 60;
 
-function SearchBlock({ value, onFilter }) {
+function SearchBox({ value, onFilter }) {
   const id = useId();
   return (
     <div>
@@ -21,4 +21,4 @@ function SearchBlock({ value, onFilter }) {
   );
 }
 
-export default SearchBlock;
+export default SearchBox;

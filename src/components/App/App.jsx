@@ -1,5 +1,5 @@
 import ContactForm from "../ContactForm/ContactForm";
-import SearchBlock from "../SearchBlock/SearchBlock";
+import SearchBox from "../SearchBox/SearchBox";
 import ContactList from "../ContactList/ContactList";
 import { useState } from "react";
 import css from "./App.module.css";
@@ -27,17 +27,15 @@ function App() {
     );
   }
 
-  const filteredContacts = contacts.filter(
-    (contact) =>
-      contact.name.toLowerCase().includes(filter) ||
-      contact.number.includes(filter)
+  const filteredContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(filter.trim())
   );
 
   return (
     <div className={css.phonebook}>
       <h1>Phonebook</h1>
       <ContactForm onAdd={AddContact} />
-      <SearchBlock value={filter} onFilter={setFilter} />
+      <SearchBox value={filter} onFilter={setFilter} />
       <ContactList contacts={filteredContacts} onDelete={RemoveContact} />
     </div>
   );
